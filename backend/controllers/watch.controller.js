@@ -245,19 +245,8 @@ export const getWatchServicesWithUpcomingEstimation = async (req, res) => {
     // Extract the billNo from each service
     const billNos = services.map(service => service.billNo);
 
-    // Get the user from the decoded token (userId)
-    const user = await User.findById(req.userId);  // Use userId from JWT token
-
-    // Check if the user exists
-    if (!user) {
-      return res.status(404).json({
-        success: false,
-        message: 'User not found',
-      });
-    }
-
-    // Get the user's email
-    const email = user.email;
+    // Hardcoded email
+    const email = 'yeshwanthds2002@gmail.com';
 
     // Send email with the list of bill numbers
     await sendDueWatchServicesEmail(email, billNos);

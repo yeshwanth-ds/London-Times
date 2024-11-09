@@ -21,7 +21,7 @@ router.get('/watchService/:billNo',verifyToken, getWatchServiceByBillNo);
 
 router.put('/updateStatus/:billNo',verifyToken, updateWatchServiceStatus);
 
-router.get('/getUpcomingEstimatedOrders',verifyToken, getWatchServicesWithUpcomingEstimation);
+router.get('/getUpcomingEstimatedOrders', getWatchServicesWithUpcomingEstimation);
 
 // Routes to get watch services based on different statuses
 router.get("/allWatchServices", verifyToken, getAllWatchServices);
