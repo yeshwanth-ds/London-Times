@@ -74,14 +74,14 @@ const TrackWatchPage = () => {
       <Header />
       <ToastContainer />
 
-      <div className="container mx-auto px-4 py-16 flex">
-        <aside className="w-1/4 p-4 border-r border-gray-200">
+      <div className="container mx-auto px-4 py-16 flex flex-col lg:flex-row">
+        <aside className="w-full lg:w-1/4 p-4 border-r border-gray-200 mb-8 lg:mb-0">
           <h3 className="text-lg font-semibold mb-4">Filter Watch Services</h3>
           <ul className="space-y-2">
             {['All', 'Pending', 'In Progress', 'Completed', 'Delivered'].map((status) => (
               <li key={status}>
                 <button
-                  className={`w-full py-2 text-left px-4 rounded ${selectedStatus === status ? 'bg-gold text-white' : 'bg-gray-100'}`}
+                  className={`w-full py-2 text-left px-4 rounded ${selectedStatus === status ? 'bg-gold text-black' : 'bg-gray-100'}`}
                   onClick={() => handleStatusChange(status)}
                 >
                   {status} Watches
@@ -89,15 +89,11 @@ const TrackWatchPage = () => {
               </li>
             ))}
           </ul>
-        </aside>
 
-        <main className="flex-1 p-4">
-          <h2 className="text-2xl font-bold mb-6">{selectedStatus} Watch Services</h2>
-
-          {/* Search Section */}
-          <div className="mb-4">
-            <h3 className="text-lg font-semibold">Search by Bill No</h3>
-            <div className="flex space-x-4 items-center">
+          {/* Search Section - Moved to the left */}
+          <div className="mt-8">
+            <h3 className="text-lg font-semibold mb-4">Search by Bill No</h3>
+            <div className="flex flex-col space-y-2">
               <input
                 type="text"
                 value={searchBillNo}
@@ -106,113 +102,115 @@ const TrackWatchPage = () => {
                 className="p-2 border border-gray-300 rounded"
               />
               <button
-                onClick={handleSearch}
-                className="py-2 px-4 bg-blue-500 text-white rounded"
-              >
-                Search
-              </button>
+  onClick={handleSearch}
+  className="bg-black hover:bg-gray-800 text-white font-bold py-3 px-8 rounded-full transition duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-black focus:ring-opacity-50"
+>
+  Search
+</button>
+
+
             </div>
           </div>
+        </aside>
 
-          {/* Display watch services or search results */}
-          {searchResult ? (
-            <div>
-              <h3 className="text-lg font-semibold">Search Result</h3>
-              <table className="w-full border-collapse border">
-                <thead>
-                  <tr>
-                    <th className="border p-3 bg-gray-100">Bill No</th>
-                    <th className="border p-3 bg-gray-100">Customer Details</th>
-                    <th className="border p-3 bg-gray-100">Estimated Completion Date</th>
-                    <th className="border p-3 bg-gray-100">Description</th>
-                    <th className="border p-3 bg-gray-100">Status</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr key={searchResult.billNo}>
-                    <td className="border p-3">{searchResult.billNo}</td>
-                    <td className="border p-3">
-                      <p><strong>Name:</strong> {searchResult.customerName}</p>
-                      <p><strong>Email:</strong> {searchResult.customerEmail}</p>
-                      <p><strong>Phone:</strong> {searchResult.customerPhoneNumber}</p>
-                      <p><strong>Model:</strong> {searchResult.model}</p>
-                    </td>
-                    <td className="border p-3">{searchResult.estimatedCompletionDate}</td>
-                    <td className="border p-3">{searchResult.description}</td>
-                    <td className={`border p-3 ${statusColors[searchResult.serviceStatus]}`}>
-                      <select
-                        value={searchResult.serviceStatus}
-                        onChange={(e) => updateStatus(searchResult.billNo, e.target.value)}
-                        className="p-2 border rounded"
-                      >
-                        {['Pending', 'In Progress', 'Completed', 'Delivered'].map((status) => (
-                          <option key={status} value={status}>{status}</option>
-                        ))}
-                      </select>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          ) : (
-            <div>
-              {/* Display filtered watch services based on selected status */}
-              {watchServices.length > 0 ? (
-                <table className="w-full border-collapse border">
-                  <thead>
-                    <tr>
-                      <th className="border p-3 bg-gray-100">Bill No</th>
-                      <th className="border p-3 bg-gray-100">Customer Details</th>
-                      <th className="border p-3 bg-gray-100">Estimated Completion Date</th>
-                      <th className="border p-3 bg-gray-100">Description</th>
-                      <th className="border p-3 bg-gray-100">Status</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {watchServices.map((service) => (
-                      <tr key={service.billNo}>
-                        <td className="border p-3">{service.billNo}</td>
-                        <td className="border p-3">
-                          <p><strong>Name:</strong> {service.customerName}</p>
-                          <p><strong>Email:</strong> {service.customerEmail}</p>
-                          <p><strong>Phone:</strong> {service.customerPhoneNumber}</p>
-                          <p><strong>Model:</strong> {service.model}</p>
-                        </td>
-                        <td className="border p-3">{new Date(service.estimatedCompletionDate).toISOString().split('T')[0]}</td>
+        <main className="flex-1 p-4">
+  <h2 className="text-2xl font-bold mb-6">{selectedStatus} Watch Services</h2>
 
-                        <td className="border p-3">{service.description}</td>
-                        <td className={`border p-3 ${statusColors[service.serviceStatus]}`}>
-                          <select
-                            value={service.serviceStatus}
-                            onChange={(e) => updateStatus(service.billNo, e.target.value)}
-                            className="p-2 border rounded"
-                          >
-                            {['Pending', 'In Progress', 'Completed', 'Delivered'].map((status) => (
-                              <option key={status} value={status}>{status}</option>
-                            ))}
-                          </select>
-                        </td>
-                      </tr>
+  {/* Display watch services or search results */}
+  {searchResult ? (
+    <div>
+      <h3 className="text-lg font-semibold mb-4">Search Result</h3>
+      <table className="w-full border-collapse border text-sm md:text-base rounded-lg overflow-hidden shadow-lg">
+        <thead>
+          <tr>
+            <th className="border p-4 bg-gray-100 font-medium text-left">Bill No</th>
+            <th className="border p-4 bg-gray-100 font-medium text-left">Customer Details</th>
+            <th className="border p-4 bg-gray-100 font-medium text-left">Estimated Completion Date</th>
+            <th className="border p-4 bg-gray-100 font-medium text-left">Description</th>
+            <th className="border p-4 bg-gray-100 font-medium text-left">Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr key={searchResult.billNo}>
+            <td className="border p-4">{searchResult.billNo}</td>
+            <td className="border p-4">
+              <p><strong>Name:</strong> {searchResult.customerName}</p>
+              <p><strong>Email:</strong> {searchResult.customerEmail}</p>
+              <p><strong>Phone:</strong> {searchResult.customerPhoneNumber}</p>
+              <p><strong>Service Type:</strong> {searchResult.serviceType}</p>
+              <p><strong>Watch Type:</strong> {searchResult.watchType}</p>
+              <p><strong>Cost:</strong> ${searchResult.cost}</p>
+            </td>
+            <td className="border p-4">{searchResult.estimatedCompletionDate}</td>
+            <td className="border p-4">{searchResult.description}</td>
+            <td className={`border p-4 ${statusColors[searchResult.serviceStatus]}`}>
+              <select
+                value={searchResult.serviceStatus}
+                onChange={(e) => updateStatus(searchResult.billNo, e.target.value)}
+                className="p-2 border rounded"
+              >
+                {['Pending', 'In Progress', 'Completed', 'Delivered'].map((status) => (
+                  <option key={status} value={status}>{status}</option>
+                ))}
+              </select>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  ) : (
+    <div>
+      {/* Display filtered watch services based on selected status */}
+      {watchServices.length > 0 ? (
+        <table className="w-full border-collapse border text-sm md:text-base rounded-lg overflow-hidden shadow-lg">
+          <thead>
+            <tr>
+              <th className="border p-4 bg-gray-100 font-medium text-left">Bill No</th>
+              <th className="border p-4 bg-gray-100 font-medium text-left">Customer Details</th>
+              <th className="border p-4 bg-gray-100 font-medium text-left">Estimated Completion Date</th>
+              <th className="border p-4 bg-gray-100 font-medium text-left">Description</th>
+              <th className="border p-4 bg-gray-100 font-medium text-left">Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            {watchServices.map((service) => (
+              <tr key={service.billNo}>
+                <td className="border p-4">{service.billNo}</td>
+                <td className="border p-4">
+                  <p><strong>Name:</strong> {service.customerName}</p>
+                  <p><strong>Email:</strong> {service.customerEmail}</p>
+                  <p><strong>Phone:</strong> {service.customerPhoneNumber}</p>
+                  <p><strong>Service Type:</strong> {service.serviceType}</p>
+                  <p><strong>Watch Type:</strong> {service.watchType}</p>
+                  <p><strong>Cost:</strong> ${service.cost}</p>
+                </td>
+                <td className="border p-4">{new Date(service.estimatedCompletionDate).toISOString().split('T')[0]}</td>
+                <td className="border p-4">{service.description}</td>
+                <td className={`border p-4 ${statusColors[service.serviceStatus]}`}>
+                  <select
+                    value={service.serviceStatus}
+                    onChange={(e) => updateStatus(service.billNo, e.target.value)}
+                    className="p-2 border rounded"
+                  >
+                    {['Pending', 'In Progress', 'Completed', 'Delivered'].map((status) => (
+                      <option key={status} value={status}>{status}</option>
                     ))}
-                  </tbody>
-                </table>
-              ) : (
-                <p className="text-gray-500">No watch services found for the selected status.</p>
-              )}
-            </div>
-          )}
-        </main>
-      </div>
+                  </select>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      ) : (
+        <p className="text-gray-500">No watch services found.</p>
+      )}
+    </div>
+  )}
+</main>
 
-      <footer className="bg-white border-t border-gray-200 py-4">
-        <div className="container mx-auto px-4 text-center text-sm text-gray-600">
-          © {new Date().getFullYear()} CHRONO Luxury Timepieces. All rights reserved.
-        </div>
-      </footer>
+      </div>
     </div>
   );
 };
 
 export default TrackWatchPage;
-
-
