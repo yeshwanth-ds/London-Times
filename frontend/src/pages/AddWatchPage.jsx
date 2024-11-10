@@ -5,6 +5,8 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Header from "../components/Header";
 
+const API_URL = import.meta.env.MODE === "development" ? "http://localhost:5000/api/watch" : "/api/watch";
+
 const AddWatchPage = () => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
@@ -44,8 +46,9 @@ const AddWatchPage = () => {
       return acc;
     }, {});
 
+  
     try {
-      const response = await axios.post("http://localhost:5000/api/watch/newWatchService", filteredFormData);
+      const response = await axios.post(`${API_URL}/newWatchService`, filteredFormData);
       if (response.data.success) {
         toast.success("Watch service added successfully!");
         setTimeout(() => navigate("/dashboard"), 2000); // Redirect after 2 seconds
