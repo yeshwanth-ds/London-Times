@@ -107,6 +107,11 @@ const SignUpPage = () => {
                 {isLoading ? <Loader className="w-6 h-6 animate-spin mx-auto" /> : "Sign Up"}
               </button>
             </form>
+
+            {/* Disclaimer about administrative access */}
+            <p className="text-xs text-gray-500 mt-4">
+              Note: Administrative access to certain features is restricted and granted only to authorized users. If granted administrative access, you may be held responsible for specific actions.
+            </p>
           </div>
           <div className="px-8 py-4 bg-gray-50 flex justify-center">
             <p className="text-sm text-gray-600">

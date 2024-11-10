@@ -74,6 +74,14 @@ const LoginPage = () => {
               </button>
             </form>
           </div>
+
+          {/* Disclaimer Section */}
+          <div className="px-8 py-4 bg-white flex justify-center mt-4">
+            <p className="text-xs text-gray-600 text-center">
+              Admin access is granted under strict responsibility. Ensure you follow all guidelines and policies when managing user data and access.
+            </p>
+          </div>
+
           <div className="px-8 py-4 bg-gray-50 flex justify-center">
             <p className="text-sm text-gray-600">
               Don't have an account?{" "}
