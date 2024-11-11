@@ -226,7 +226,7 @@ const AddWatchPage = () => {
 
       <footer className="bg-white border-t border-gray-200 py-4">
         <div className="container mx-auto px-4 text-center text-sm text-gray-600">
-          © {new Date().getFullYear()} CHRONO Luxury Timepieces. All rights reserved.
+          © {new Date().getFullYear()} LondonTimes. All rights reserved.
         </div>
       </footer>
       <ToastContainer position="top-center" autoClose={2000} hideProgressBar={false} closeOnClick pauseOnHover />

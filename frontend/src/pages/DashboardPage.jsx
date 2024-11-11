@@ -13,21 +13,22 @@ const DashboardPage = () => {
 
   return (
     <div className="min-h-screen bg-white text-black flex flex-col">
-      <header className="bg-white shadow-md">
-        <div className="container mx-auto flex justify-between items-center p-4">
-          <Link to="/" className="flex items-center space-x-2">
-            <Clock className="h-8 w-8 text-gold" />
-            <span className="text-2xl font-bold text-black">CHRONO</span>
-          </Link>
-          <button
-            onClick={handleLogout}
-            className="flex items-center space-x-2 text-gold hover:text-gold/80 transition-colors duration-200"
-          >
-            <LogOut className="h-5 w-5" />
-            <span>Logout</span>
-          </button>
-        </div>
-      </header>
+    <header className="bg-white shadow-md">
+  <div className="container mx-auto flex justify-between items-center p-4">
+    <Link to="/" className="flex items-center space-x-2">
+      <Clock className="h-8 w-8 text-gold" />
+      <span className="text-2xl font-bold text-black">LondonTimes</span>
+    </Link>
+    <button
+      onClick={handleLogout}
+      className="flex items-center space-x-2 text-gold hover:text-gold/80 transition-colors duration-200"
+    >
+      <LogOut className="h-5 w-5" />
+      <span>Logout</span>
+    </button>
+  </div>
+</header>
+
 
       <main className="flex-grow container mx-auto px-4 py-12">
         <h2 className="text-3xl font-bold mb-8 text-center text-gold">Dashboard</h2>
@@ -102,7 +103,7 @@ const DashboardPage = () => {
 
       <footer className="bg-white border-t border-gray-200 py-4">
         <div className="container mx-auto px-4 text-center text-sm text-gray-600">
-          © {new Date().getFullYear()} CHRONO Luxury Timepieces. All rights reserved.
+          © {new Date().getFullYear()} LondonTimes. All rights reserved.
         </div>
       </footer>
     </div>

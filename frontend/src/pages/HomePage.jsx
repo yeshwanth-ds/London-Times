@@ -39,7 +39,7 @@ const Homepage = () => {
           <div className="container mx-auto px-4">
             <h2 className="text-4xl font-bold text-center mb-12 text-gold">Our Craftsmanship</h2>
             <p className="text-center text-gray-600 max-w-2xl mx-auto">
-              Each CHRONO timepiece is a masterpiece of precision engineering and artisanal skill.
+              Each LondonTimes timepiece is a masterpiece of precision engineering and artisanal skill.
               Our master watchmakers combine centuries-old techniques with cutting-edge technology
               to create watches of unparalleled beauty and accuracy.
             </p>

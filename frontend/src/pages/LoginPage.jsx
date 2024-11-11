@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { Mail, Lock, Loader, Clock } from "lucide-react";
 import { useAuthStore } from "../store/authStore";
+import Header from "../components/Header";
 
 const Input = ({ icon: Icon, ...props }) => (
   <div className="relative mb-4">
@@ -26,14 +27,7 @@ const LoginPage = () => {
 
   return (
     <div className="min-h-screen bg-white text-black flex flex-col">
-      <header className="bg-white shadow-md">
-        <div className="container mx-auto flex justify-between items-center p-4">
-          <Link to="/" className="flex items-center space-x-2">
-            <Clock className="h-8 w-8 text-gold" />
-            <span className="text-2xl font-bold text-black">CHRONO</span>
-          </Link>
-        </div>
-      </header>
+      <Header></Header>
 
       <main className="flex-grow flex items-center justify-center px-4 py-12">
         <div className="max-w-md w-full bg-white rounded-lg shadow-xl overflow-hidden">
@@ -95,7 +89,7 @@ const LoginPage = () => {
 
       <footer className="bg-white border-t border-gray-200 py-4">
         <div className="container mx-auto px-4 text-center text-sm text-gray-600">
-          © {new Date().getFullYear()} CHRONO Luxury Timepieces. All rights reserved.
+          © {new Date().getFullYear()} LondonTimes. All rights reserved.
         </div>
       </footer>
     </div>

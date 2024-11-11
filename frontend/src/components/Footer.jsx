@@ -8,10 +8,11 @@ const Footer = () => {
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div>
-            <h3 className="text-xl font-semibold mb-4 text-gold">About CHRONO</h3>
+            <h3 className="text-xl font-semibold mb-4 text-gold">About LondonTimes</h3>
             <p className="text-sm text-gray-600">
-              Crafting timeless elegance since 1950. Our watches are a testament to precision, luxury, and unparalleled style.
-            </p>
+  At London Times, we blend tradition and innovation to offer you watches that embody sophistication, craftsmanship, and timeless style.
+</p>
+
           </div>
           <div>
             <h3 className="text-xl font-semibold mb-4 text-gold">Quick Links</h3>
@@ -24,9 +25,9 @@ const Footer = () => {
           <div>
             <h3 className="text-xl font-semibold mb-4 text-gold">Contact Us</h3>
             <ul className="space-y-2 text-sm text-gray-600">
-              <li>123 Luxury Lane, Timeville</li>
-              <li>contact@chrono.com</li>
-              <li>+1 (555) 123-4567</li>
+              <li>Vadodara Complex, Near Head Post Office</li>
+              <li>contact@londontimes.com</li>
+              <li>+91 08202531170</li>
             </ul>
           </div>
           <div>
@@ -48,7 +49,7 @@ const Footer = () => {
           </div>
         </div>
         <div className="mt-8 pt-8 border-t border-gray-200 text-center text-sm text-gray-600">
-          © {new Date().getFullYear()} CHRONO. All Rights Reserved.
+          © {new Date().getFullYear()} LondonTimes. All Rights Reserved.
         </div>
       </div>
     </footer>
