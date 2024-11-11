@@ -248,7 +248,7 @@ export const getWatchServicesWithUpcomingEstimation = async (req, res) => {
     const billNos = services.map(service => service.billNo);
 
     // Hardcoded email
-    const email = 'yeshwanthds2002@gmail.com';
+    const email = process.env.ADMIN_EMAIL;
 
     // Send email with the list of bill numbers
     await sendDueWatchServicesEmail(email, billNos);
@@ -323,7 +323,9 @@ export const sendDeliveredWatchServicesReport = async (req, res) => {
         const subject = 'Delivered Watch Services Report';
         const message = '<p>Please find attached the report of delivered watch services.</p>';
 
-        await sendDeliveredWatchEmailWithAttachment('yeshwanthds2002@gmail.com', subject, message, filePath);
+        const email = process.env.ADMIN_EMAIL;
+
+        await sendDeliveredWatchEmailWithAttachment(email, subject, message, filePath);
 
         fs.unlinkSync(filePath);
 
