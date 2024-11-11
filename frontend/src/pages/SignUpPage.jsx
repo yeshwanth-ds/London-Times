@@ -94,7 +94,7 @@ const SignUpPage = () => {
               <PasswordStrengthMeter password={password} />
 
               <button
-                className="w-full bg-gold hover:bg-gold/80 text-black font-bold py-3 px-4 rounded-full transition duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-gold focus:ring-opacity-50"
+                className="w-full bg-gold hover:bg-gold/80 text-black font-bold py-3 px-4 rounded-full border-2 border-black transition duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-black focus:ring-opacity-50"
                 type="submit"
                 disabled={isLoading}
               >

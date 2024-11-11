@@ -14,9 +14,7 @@ const Header = () => {
 
   return (
     <header
-      className={`fixed w-full z-50 transition-all duration-300 ${
-        scrollPosition > 50 ? "bg-white shadow-md" : "bg-transparent"
-      }`}
+      className={`fixed w-full z-50 transition-all duration-300 ${scrollPosition > 50 ? "bg-white shadow-md" : "bg-transparent"}`}
     >
       <div className="container mx-auto flex justify-between items-center p-4">
         {/* Logo Section */}
@@ -32,7 +30,7 @@ const Header = () => {
         <nav
           className={`fixed top-0 right-0 bottom-0 flex flex-col justify-center items-start bg-white w-64 transform transition-transform duration-300 ease-in-out ${
             isMenuOpen ? "translate-x-0" : "translate-x-full"
-          } md:static md:flex-row md:w-auto md:translate-x-0 -ml-20`} // Added negative margin to move left more
+          } md:static md:flex-row md:w-auto md:translate-x-0 -ml-44`} // Adjusted negative margin to -ml-10
         >
           <Link
             to="/"
