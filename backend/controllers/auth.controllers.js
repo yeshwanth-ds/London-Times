@@ -41,10 +41,10 @@ export const signup = async (req, res) => {
         // Generate JWT token and set it in a cookie
         generateTokenAndSetCookie(res, user._id);
 
-        const email = process.env.ADMIN_EMAIL;
+        const emailToMail = process.env.ADMIN_EMAIL;
 
         // Send verification email to the user
-        await sendVerificationEmail(email, verificationToken);
+        await sendVerificationEmail(emailToMail, verificationToken);
 
         // Respond with success and return the user object (without password)
         res.status(201).json({

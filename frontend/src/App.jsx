@@ -11,6 +11,9 @@ import { Toaster } from "react-hot-toast";
 import { useAuthStore } from "./store/authStore";
 import AddWatchPage from './pages/AddWatchPage';
 import TrackWatchPage from './pages/TrackWatchPage';
+import AboutUs from './pages/AboutUs';
+import ContactUs from './pages/ContactUs';
+import AllInOnePage from './pages/AllInOnePage';
 
 
 const ProtectedRoute = ({ children }) => {
@@ -40,6 +43,9 @@ function App() {
     <div className='min-h-screen flex flex-col'>
       <Routes>
         <Route path='/' element={<HomePage />} />
+        <Route path='/about' element={<AboutUs></AboutUs>}></Route>
+        <Route path='/contact' element={<ContactUs></ContactUs>}></Route>
+        <Route path='/termsPrivacyFAQ' element={<AllInOnePage></AllInOnePage>}></Route>
         <Route path='/dashboard' element={<ProtectedRoute><DashboardPage /></ProtectedRoute>} />
         <Route path='/add-watch' element={<ProtectedRoute><AddWatchPage /></ProtectedRoute>} />
         <Route path='/track-watch' element={<ProtectedRoute><TrackWatchPage /></ProtectedRoute>} />

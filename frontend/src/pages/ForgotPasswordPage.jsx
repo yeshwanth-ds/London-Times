@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { Mail, ArrowLeft, Clock, Loader } from "lucide-react";
 import { useAuthStore } from "../store/authStore";
+import Header from "../components/Header";
 
 const Input = ({ icon: Icon, ...props }) => (
   <div className="relative mb-4">
@@ -27,15 +28,8 @@ const ForgotPasswordPage = () => {
 
   return (
     <div className="min-h-screen bg-white text-black flex flex-col">
-      <header className="bg-white shadow-md">
-        <div className="container mx-auto flex justify-between items-center p-4">
-          <Link to="/" className="flex items-center space-x-2">
-            <Clock className="h-8 w-8 text-gold" />
-            <span className="text-2xl font-bold text-black">CHRONO</span>
-          </Link>
-        </div>
-      </header>
-
+      
+<Header></Header>
       <main className="flex-grow flex items-center justify-center px-4 py-12">
         <div className="max-w-md w-full bg-white rounded-lg shadow-xl overflow-hidden">
           <div className="p-8">
