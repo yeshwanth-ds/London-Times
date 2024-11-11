@@ -13,10 +13,10 @@ export const VERIFICATION_EMAIL_TEMPLATE = `
       max-width: 600px;
       margin: 0 auto;
       padding: 20px;
-      background-color: #f3f4f6; /* Light background color */
+      background-color: #f3f4f6;
     }
     .header {
-      background-color: #1F2937; /* Dark background color */
+      background-color: #1F2937;
       padding: 20px;
       text-align: center;
       border-radius: 5px 5px 0 0;
@@ -35,7 +35,7 @@ export const VERIFICATION_EMAIL_TEMPLATE = `
       font-size: 32px;
       font-weight: bold;
       letter-spacing: 5px;
-      color: #0EA5E9; /* Highlight color */
+      color: #0EA5E9;
       text-align: center;
       margin: 30px 0;
     }
@@ -49,7 +49,7 @@ export const VERIFICATION_EMAIL_TEMPLATE = `
 </head>
 <body>
   <div class="header">
-    <h1>Verify Your Email with CHRONO</h1>
+    <h1>Verify Your Email with LondonTimes</h1>
   </div>
   <div class="content">
     <p>Hello,</p>
@@ -58,7 +58,7 @@ export const VERIFICATION_EMAIL_TEMPLATE = `
     <p>Enter this code on the verification page to complete your registration.</p>
     <p>This code will expire in 15 minutes for security reasons.</p>
     <p>If you didn’t create an account with us, please ignore this email.</p>
-    <p>Best regards,<br>The CHRONO Team</p>
+    <p>Best regards,<br>The LondonTimes Team</p>
   </div>
   <div class="footer">
     <p>This is an automated message; please do not reply to this email.</p>
@@ -127,13 +127,13 @@ export const PASSWORD_RESET_SUCCESS_TEMPLATE = `
   </div>
   <div class="content">
     <p>Hello,</p>
-    <p>Your password has been successfully reset for your CHRONO account.</p>
+    <p>Your password has been successfully reset for your LondonTimes account.</p>
     <div style="text-align: center; margin: 30px 0;">
       <div class="success-icon">✓</div>
     </div>
     <p>If you did not initiate this reset, please contact support immediately.</p>
     <p>Thank you for helping us keep your account secure.</p>
-    <p>Best regards,<br>The CHRONO Team</p>
+    <p>Best regards,<br>The LondonTimes Team</p>
   </div>
   <div class="footer">
     <p>This is an automated message; please do not reply to this email.</p>
@@ -201,13 +201,13 @@ export const PASSWORD_RESET_REQUEST_TEMPLATE = `
   </div>
   <div class="content">
     <p>Hello,</p>
-    <p>We received a request to reset your CHRONO account password. If this was not you, please ignore this message.</p>
+    <p>We received a request to reset your LondonTimes account password. If this was not you, please ignore this message.</p>
     <p>To reset your password, click the button below:</p>
     <div style="text-align: center; margin: 30px 0;">
       <a href="{resetURL}" class="reset-button">Reset Password</a>
     </div>
     <p>This link will expire in 1 hour for security reasons.</p>
-    <p>Best regards,<br>The CHRONO Team</p>
+    <p>Best regards,<br>The LondonTimes Team</p>
   </div>
   <div class="footer">
     <p>This is an automated message; please do not reply to this email.</p>
@@ -222,7 +222,7 @@ export const WELCOME_EMAIL_TEMPLATE = `
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Welcome to CHRONO</title>
+  <title>Welcome to LondonTimes</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -266,14 +266,14 @@ export const WELCOME_EMAIL_TEMPLATE = `
 </head>
 <body>
   <div class="header">
-    <h1>Welcome to CHRONO</h1>
+    <h1>Welcome to LondonTimes</h1>
   </div>
   <div class="content">
     <p>Hello,</p>
-    <div class="welcome-message">Welcome to the CHRONO community!</div>
-    <p>Thank you for joining CHRONO. We’re excited to have you with us and look forward to providing a seamless experience.</p>
+    <div class="welcome-message">Welcome to the LondonTimes community!</div>
+    <p>Thank you for joining LondonTimes. We’re excited to have you with us and look forward to providing a seamless experience.</p>
     <p>If you have any questions or need support, please feel free to reach out to us.</p>
-    <p>Best regards,<br>The CHRONO Team</p>
+    <p>Best regards,<br>The LondonTimes Team</p>
   </div>
   <div class="footer">
     <p>This is an automated message; please do not reply to this email.</p>
@@ -344,7 +344,7 @@ export const DUE_WATCH_SERVICES_TEMPLATE = (billNos) => `
       ${billNos.map(billNo => `<li>Bill No: ${billNo}</li>`).join('')}
     </ul>
     <p>Please ensure these services are completed in time.</p>
-    <p>Best regards,<br>The CHRONO Team</p>
+    <p>Best regards,<br>The LondonTimes Team</p>
   </div>
   <div class="footer">
     <p>This is an automated message; please do not reply to this email.</p>
@@ -352,4 +352,3 @@ export const DUE_WATCH_SERVICES_TEMPLATE = (billNos) => `
 </body>
 </html>
 `;
-

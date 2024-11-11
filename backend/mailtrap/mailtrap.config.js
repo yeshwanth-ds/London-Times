@@ -16,5 +16,5 @@ export const transporter = nodemailer.createTransport({
 // Define the sender information
 export const sender = {
   email: process.env.USER,  // Use your email from .env
-  name: 'WATCH-STORE',     // Name to show as the sender
+  name: 'London-Times',     // Name to show as the sender
 };
