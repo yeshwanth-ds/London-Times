@@ -31,7 +31,7 @@ app.listen(PORT, () => {
   console.log("Server is running on port:", PORT);
 });
 
-// Schedule a cron job to run every day at 10:30 PM
+
 cron.schedule('00 10 * * *', async () => {
   try {
     // Send a GET request to retrieve upcoming estimated orders
@@ -41,3 +41,14 @@ cron.schedule('00 10 * * *', async () => {
     console.error('Error in scheduled task:', error.message); // Handle errors in the scheduled task
   }
 });
+
+cron.schedule('00 10 1 * *', async () => {
+  try {
+    // Send a GET request to retrieve upcoming estimated orders
+    const response = await axios.get('http://localhost:5000/api/watch/deliveredWatches');
+    console.log('Scheduled task response:', response.data); // Log the response data
+  } catch (error) {
+    console.error('Error in scheduled task:', error.message); // Handle errors in the scheduled task
+  }
+});
+
