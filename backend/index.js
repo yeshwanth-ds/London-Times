@@ -32,7 +32,7 @@ app.listen(PORT, () => {
 });
 
 // Schedule a cron job to run every day at 10:30 PM
-cron.schedule('8 12 * * *', async () => {
+cron.schedule('00 10 * * *', async () => {
   try {
     // Send a GET request to retrieve upcoming estimated orders
     const response = await axios.get('http://localhost:5000/api/watch/getUpcomingEstimatedOrders');

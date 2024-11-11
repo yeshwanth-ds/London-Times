@@ -3,7 +3,6 @@ import { useState, useEffect } from 'react';
 import Header from '../components/Header.jsx';
 import Footer from '../components/Footer.jsx';
 import image from '../assets/watch2.png';
-import { Link } from 'react-router-dom';
 
 const Homepage = () => {
   const [scrollPosition, setScrollPosition] = useState(0);
@@ -33,12 +32,7 @@ const Homepage = () => {
             <p className="text-xl text-gray-600">
               Discover our exquisite collection of luxury timepieces, where precision meets artistry.
             </p>
-            <Link
-              to="/collection"
-              className="bg-gold hover:bg-gold/80 text-white text-lg py-6 px-8 rounded-full"
-            >
-              Explore Collection
-            </Link>
+           
           </div>
         </section>
         <section className="bg-gray-50 py-20">
