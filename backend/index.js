@@ -31,7 +31,7 @@ app.listen(PORT, () => {
   console.log("Server is running on port:", PORT);
 });
 
-
+// Schedule a cron job to run every day at 10:30 PM
 cron.schedule('00 10 * * *', async () => {
   try {
     // Send a GET request to retrieve upcoming estimated orders
