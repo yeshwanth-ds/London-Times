@@ -10,7 +10,9 @@ import {
   getWatchServiceByBillNo,
   updateWatchServiceStatus,
   getWatchServicesWithUpcomingEstimation,
+  sendDeliveredWatchServicesReport,
 } from '../controllers/watch.controller.js';
+
 
 const router = express.Router();
 
@@ -22,6 +24,8 @@ router.get('/watchService/:billNo',verifyToken, getWatchServiceByBillNo);
 router.put('/updateStatus/:billNo',verifyToken, updateWatchServiceStatus);
 
 router.get('/getUpcomingEstimatedOrders', getWatchServicesWithUpcomingEstimation);
+
+router.get('/deliveredWatches', sendDeliveredWatchServicesReport);
 
 // Routes to get watch services based on different statuses
 router.get("/allWatchServices", verifyToken, getAllWatchServices);

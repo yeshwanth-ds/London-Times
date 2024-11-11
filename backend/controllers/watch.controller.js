@@ -1,6 +1,8 @@
 // Import the WatchService model
-import { sendDueWatchServicesEmail } from '../mailtrap/emails.js';
-import { User } from '../models/user.model.js';
+import PDFDocument from 'pdfkit';
+import fs from 'fs';
+import path from 'path';
+import { sendDeliveredWatchEmailWithAttachment, sendDueWatchServicesEmail } from '../mailtrap/emails.js';
 import { WatchService } from '../models/watch.model.js';
 
 // Controller to get a watch service by bill number
@@ -266,4 +268,96 @@ export const getWatchServicesWithUpcomingEstimation = async (req, res) => {
     });
   }
 };
+// Controller to send a report of delivered watch services via email and delete delivered items
+export const sendDeliveredWatchServicesReport = async (req, res) => {
+  try {
+    const services = await WatchService.find({ serviceStatus: 'Delivered' });
+    
+    if (services.length === 0) {
+      return res.status(404).json({ success: false, message: 'No delivered watch services found.' });
+    }
 
+    const doc = new PDFDocument();
+    const filePath = path.resolve('./delivered_watch_services_report.pdf');
+    const writeStream = fs.createWriteStream(filePath);
+
+    doc.pipe(writeStream);
+
+    // Get current date and time for the report header
+    const now = new Date();
+    const formattedDate = now.toLocaleDateString();
+    const formattedTime = now.toLocaleTimeString();
+
+    // Report Header with date and time
+    doc.fontSize(16).text('Delivered Watch Services Report', { align: 'center' });
+    doc.fontSize(10).text(`Report generated on: ${formattedDate} at ${formattedTime}`, { align: 'center' });
+    doc.moveDown();
+    doc.fontSize(12).text('Details of Delivered Watch Services:');
+    doc.moveDown();
+
+    // Iterate over each service and add its details
+    services.forEach((service, index) => {
+      doc.fontSize(12).text(`Service #${index + 1}`, { underline: true });
+      doc.moveDown(0.5);
+      doc.fontSize(10)
+        .text(`Bill No: ${service.billNo}`)
+        .text(`Customer Name: ${service.customerName}`)
+        .text(`Customer Email: ${service.customerEmail || 'N/A'}`)
+        .text(`Customer Phone Number: ${service.customerPhoneNumber || 'N/A'}`)
+        .text(`Watch Type: ${service.watchType}`)
+        .text(`Brand: ${service.brand || 'N/A'}`)
+        .text(`Model: ${service.model || 'N/A'}`)
+        .text(`Service Type: ${service.serviceType}`)
+        .text(`Received Date: ${service.receivedDate.toDateString()}`)
+        .text(`Estimated Completion Date: ${service.estimatedCompletionDate.toDateString()}`)
+        .text(`Service Status: ${service.serviceStatus}`)
+        .text(`Cost: $${service.cost}`)
+        .text(`Description: ${service.description || 'No additional details'}`);
+      doc.moveDown(1);
+    });
+
+    doc.end();
+
+    writeStream.on('finish', async () => {
+      try {
+        const subject = 'Delivered Watch Services Report';
+        const message = '<p>Please find attached the report of delivered watch services.</p>';
+
+        await sendDeliveredWatchEmailWithAttachment('yeshwanthds2002@gmail.com', subject, message, filePath);
+
+        fs.unlinkSync(filePath);
+
+        // Delete delivered services after successful email sending
+        await WatchService.deleteMany({ serviceStatus: 'Delivered' });
+
+        res.status(200).json({
+          success: true,
+          message: 'Delivered watch services report generated, sent via email, and records deleted successfully!',
+        });
+      } catch (error) {
+        console.error('Error sending delivered watch services email or deleting records:', error);
+        res.status(500).json({
+          success: false,
+          message: 'Server error, unable to complete email sending or record deletion.',
+          error: error.message,
+        });
+      }
+    });
+
+    writeStream.on('error', (error) => {
+      console.error('Error writing PDF file:', error);
+      res.status(500).json({
+        success: false,
+        message: 'Server error, unable to generate PDF file.',
+        error: error.message,
+      });
+    });
+  } catch (error) {
+    console.error('Error generating delivered watch services report:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Server error, unable to generate delivered watch services report.',
+      error: error.message,
+    });
+  }
+};

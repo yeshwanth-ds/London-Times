@@ -1,6 +1,31 @@
 import { transporter, sender } from './mailtrap.config.js';  // Now imports transporter from updated config
 import { DUE_WATCH_SERVICES_TEMPLATE, PASSWORD_RESET_REQUEST_TEMPLATE, PASSWORD_RESET_SUCCESS_TEMPLATE, VERIFICATION_EMAIL_TEMPLATE, WELCOME_EMAIL_TEMPLATE } from './emailTemplates.js';
 
+
+export const sendDeliveredWatchEmailWithAttachment = async (email, subject, message, filePath) => {
+    try {
+        const mailOptions = {
+            from: `"${sender.name}" <${sender.email}>`,
+            to: email,
+            subject: subject,
+            html: message,
+            attachments: [
+                {
+                    filename: 'Delivered_Watch_Services_Report.pdf',
+                    path: filePath,
+                },
+            ],
+        };
+
+        const info = await transporter.sendMail(mailOptions);
+        console.log("Email sent with attachment: %s", info.messageId);
+    } catch (error) {
+        console.error("Error sending email with attachment:", error);
+        throw new Error(`Error sending email with attachment: ${error.message}`);
+    }
+};
+
+
 // Function to send a verification email
 export const sendVerificationEmail = async (email, verificationToken) => {
     try {
