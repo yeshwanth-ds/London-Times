@@ -36,6 +36,36 @@ export const getWatchServiceByBillNo = async (req, res) => {
   }
 };
 
+export const getWatchServiceByPhoneNo = async (req, res) => {
+  const { customerPhoneNumber } = req.params;  // Get the phone number from request parameters
+
+
+  try {
+    // Find the watch service by phone number
+    const service = await WatchService.findOne({ customerPhoneNumber });
+
+    if (!service) {
+      return res.status(404).json({
+        success: false,
+        message: 'No watch service found with the given phone number.',
+      });
+    }
+
+    // Respond with the retrieved watch service data
+    res.status(200).json({
+      success: true,
+      watchService: service,
+    });
+  } catch (error) {
+    console.error('Error retrieving watch service by phone number:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Server error, unable to retrieve watch service by phone number.',
+      error: error.message,
+    });
+  }
+};
+
 
 
 // Controller to update the status of a watch service by bill number

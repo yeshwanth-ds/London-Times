@@ -10,6 +10,7 @@ const TrackWatchPage = () => {
   const [selectedStatus, setSelectedStatus] = useState('All');
   const [watchServices, setWatchServices] = useState([]);
   const [searchBillNo, setSearchBillNo] = useState('');
+  const [searchPhoneNo, setSearchPhoneNo] = useState('');
   const [searchResult, setSearchResult] = useState(null);
 
   const statusColors = {
@@ -21,7 +22,7 @@ const TrackWatchPage = () => {
 
   useEffect(() => {
     const fetchWatchServices = async () => {
-      if (!searchBillNo) {
+      if (!searchBillNo && !searchPhoneNo) {
         try {
           const urlMap = {
             Pending: 'pendingWatchServices',
@@ -40,12 +41,13 @@ const TrackWatchPage = () => {
     };
 
     fetchWatchServices();
-  }, [selectedStatus, searchBillNo]);
+  }, [selectedStatus, searchBillNo, searchPhoneNo]);
 
   const handleStatusChange = (status) => {
     setSelectedStatus(status);
-    setSearchResult(null); // Reset search result when changing the status filter
-    setSearchBillNo(''); // Clear search Bill No
+    setSearchResult(null);
+    setSearchBillNo('');
+    setSearchPhoneNo('');
   };
 
   const handleSearch = async () => {
@@ -56,7 +58,7 @@ const TrackWatchPage = () => {
 
     try {
       const response = await axios.get(`${API_URL}/watchService/${searchBillNo}`);
-      setSearchResult(response.data.watchService);
+      setSearchResult([response.data.watchService]);
       toast.success('Watch service fetched successfully!');
     } catch (error) {
       setSearchResult(null);
@@ -64,17 +66,82 @@ const TrackWatchPage = () => {
     }
   };
 
+  const handlePhoneSearch = async () => {
+    if (!searchPhoneNo) {
+      toast.error('Please enter a Phone No.');
+      return;
+    }
+
+    try {
+      const response = await axios.get(`${API_URL}/watchService/phone/${searchPhoneNo}`);
+      setSearchResult([response.data.watchService]);
+      toast.success('Watch service fetched successfully!');
+    } catch (error) {
+      setSearchResult(null);
+      toast.error('No watch service found for this Phone No.');
+    }
+  };
+
   const updateStatus = async (billNo, newStatus) => {
     try {
       const response = await axios.put(`${API_URL}/updateStatus/${billNo}`, { status: newStatus });
       toast.success(response.data.message);
-      setWatchServices(watchServices.map(service =>
-        service.billNo === billNo ? { ...service, serviceStatus: newStatus } : service
-      ));
+      setWatchServices((prevServices) =>
+        prevServices.map((service) =>
+          service.billNo === billNo ? { ...service, serviceStatus: newStatus } : service
+        )
+      );
+      setSearchResult((prevResult) =>
+        prevResult && prevResult.map((service) =>
+          service.billNo === billNo ? { ...service, serviceStatus: newStatus } : service
+        )
+      );
     } catch (error) {
       toast.error('Failed to update watch service status');
     }
   };
+
+  const renderTable = (services) => (
+    <table className="w-full border-collapse border text-sm md:text-base rounded-lg overflow-hidden shadow-lg">
+      <thead>
+        <tr>
+          <th className="border p-4 bg-gray-100 font-medium text-left">Bill No</th>
+          <th className="border p-4 bg-gray-100 font-medium text-left">Customer Details</th>
+          <th className="border p-4 bg-gray-100 font-medium text-left">Estimated Completion Date</th>
+          <th className="border p-4 bg-gray-100 font-medium text-left">Description</th>
+          <th className="border p-4 bg-gray-100 font-medium text-left">Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        {services.map((service) => (
+          <tr key={service.billNo}>
+            <td className="border p-4">{service.billNo}</td>
+            <td className="border p-4">
+              <p><strong>Name:</strong> {service.customerName}</p>
+              <p><strong>Email:</strong> {service.customerEmail}</p>
+              <p><strong>Phone:</strong> {service.customerPhoneNumber}</p>
+              <p><strong>Service Type:</strong> {service.serviceType}</p>
+              <p><strong>Watch Type:</strong> {service.watchType}</p>
+              <p><strong>Cost:</strong> ₹{service.cost}</p>
+            </td>
+            <td className="border p-4">{new Date(service.estimatedCompletionDate).toLocaleDateString()}</td>
+            <td className="border p-4">{service.description}</td>
+            <td className={`border p-4 ${statusColors[service.serviceStatus]}`}>
+              <select
+                value={service.serviceStatus}
+                onChange={(e) => updateStatus(service.billNo, e.target.value)}
+                className="p-2 border rounded"
+              >
+                {['Pending', 'In Progress', 'Completed', 'Delivered'].map((status) => (
+                  <option key={status} value={status}>{status}</option>
+                ))}
+              </select>
+            </td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  );
 
   return (
     <div className="min-h-screen bg-white text-black">
@@ -97,7 +164,6 @@ const TrackWatchPage = () => {
             ))}
           </ul>
 
-          {/* Search Section */}
           <div className="mt-8">
             <h3 className="text-lg font-semibold mb-4">Search by Bill No</h3>
             <div className="flex flex-col space-y-2">
@@ -110,7 +176,26 @@ const TrackWatchPage = () => {
               />
               <button
                 onClick={handleSearch}
-                className="bg-black hover:bg-gray-800 text-white font-bold py-3 px-8 rounded-full transition duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-black focus:ring-opacity-50"
+                className="bg-black hover:bg-gray-800 text-white font-bold py-3 px-8 rounded-full transition duration-300 ease-in-out transform hover:scale-105"
+              >
+                Search
+              </button>
+            </div>
+          </div>
+
+          <div className="mt-8">
+            <h3 className="text-lg font-semibold mb-4">Search by Phone No</h3>
+            <div className="flex flex-col space-y-2">
+              <input
+                type="text"
+                value={searchPhoneNo}
+                onChange={(e) => setSearchPhoneNo(e.target.value)}
+                placeholder="Enter Phone No"
+                className="p-2 border border-gray-300 rounded"
+              />
+              <button
+                onClick={handlePhoneSearch}
+                className="bg-black hover:bg-gray-800 text-white font-bold py-3 px-8 rounded-full transition duration-300 ease-in-out transform hover:scale-105"
               >
                 Search
               </button>
@@ -120,105 +205,9 @@ const TrackWatchPage = () => {
 
         <main className="flex-1 p-4">
           <h2 className="text-2xl font-bold mb-6">{selectedStatus} Watch Services</h2>
-
-          {/* Display watch services or search results */}
-          {searchResult ? (
-            <div>
-              <h3 className="text-lg font-semibold mb-4">Search Result</h3>
-              <table className="w-full border-collapse border text-sm md:text-base rounded-lg overflow-hidden shadow-lg">
-                <thead>
-                  <tr>
-                    <th className="border p-4 bg-gray-100 font-medium text-left">Bill No</th>
-                    <th className="border p-4 bg-gray-100 font-medium text-left">Customer Details</th>
-                    <th className="border p-4 bg-gray-100 font-medium text-left">Estimated Completion Date</th>
-                    <th className="border p-4 bg-gray-100 font-medium text-left">Description</th>
-                    <th className="border p-4 bg-gray-100 font-medium text-left">Status</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr key={searchResult.billNo}>
-                    <td className="border p-4">{searchResult.billNo}</td>
-                    <td className="border p-4">
-                      <p><strong>Name:</strong> {searchResult.customerName}</p>
-                      <p><strong>Email:</strong> {searchResult.customerEmail}</p>
-                      <p><strong>Phone:</strong> {searchResult.customerPhoneNumber}</p>
-                      <p><strong>Service Type:</strong> {searchResult.serviceType}</p>
-                      <p><strong>Watch Type:</strong> {searchResult.watchType}</p>
-                      <p><strong>Cost:</strong> ${searchResult.cost}</p>
-                    </td>
-                    <td className="border p-4">{searchResult.estimatedCompletionDate}</td>
-                    <td className="border p-4">{searchResult.description}</td>
-                    <td className={`border p-4 ${statusColors[searchResult.serviceStatus]}`}>
-                      <select
-                        value={searchResult.serviceStatus}
-                        onChange={(e) => updateStatus(searchResult.billNo, e.target.value)}
-                        className="p-2 border rounded"
-                      >
-                        {['Pending', 'In Progress', 'Completed', 'Delivered'].map((status) => (
-                          <option key={status} value={status}>{status}</option>
-                        ))}
-                      </select>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          ) : (
-            <div>
-              {/* Display filtered watch services based on selected status */}
-              {watchServices.length > 0 ? (
-                <table className="w-full border-collapse border text-sm md:text-base rounded-lg overflow-hidden shadow-lg">
-                  <thead>
-                    <tr>
-                      <th className="border p-4 bg-gray-100 font-medium text-left">Bill No</th>
-                      <th className="border p-4 bg-gray-100 font-medium text-left">Customer Details</th>
-                      <th className="border p-4 bg-gray-100 font-medium text-left">Estimated Completion Date</th>
-                      <th className="border p-4 bg-gray-100 font-medium text-left">Description</th>
-                      <th className="border p-4 bg-gray-100 font-medium text-left">Status</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {watchServices.map((service) => (
-                      <tr key={service.billNo}>
-                        <td className="border p-4">{service.billNo}</td>
-                        <td className="border p-4">
-                          <p><strong>Name:</strong> {service.customerName}</p>
-                          <p><strong>Email:</strong> {service.customerEmail}</p>
-                          <p><strong>Phone:</strong> {service.customerPhoneNumber}</p>
-                          <p><strong>Service Type:</strong> {service.serviceType}</p>
-                          <p><strong>Watch Type:</strong> {service.watchType}</p>
-                          <p><strong>Cost:</strong> ₹ {service.cost}</p>
-                        </td>
-                        <td className="border p-4">{new Date(service.estimatedCompletionDate).toISOString().split('T')[0]}</td>
-                        <td className="border p-4">{service.description}</td>
-                        <td className={`border p-4 ${statusColors[service.serviceStatus]}`}>
-                          <select
-                            value={service.serviceStatus}
-                            onChange={(e) => updateStatus(service.billNo, e.target.value)}
-                            className="p-2 border rounded"
-                          >
-                            {['Pending', 'In Progress', 'Completed', 'Delivered'].map((status) => (
-                              <option key={status} value={status}>{status}</option>
-                            ))}
-                          </select>
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              ) : (
-                <p>No services found for the selected status.</p>
-              )}
-            </div>
-          )}
+          {searchResult ? renderTable(searchResult) : watchServices.length > 0 ? renderTable(watchServices) : <p>No services found for the selected status.</p>}
         </main>
-       
       </div>
-      <footer className="bg-white border-t border-gray-200 py-4">
-        <div className="container mx-auto px-4 text-center text-sm text-gray-600">
-          © {new Date().getFullYear()} LondonTimes. All rights reserved.
-        </div>
-      </footer>
     </div>
   );
 };

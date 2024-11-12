@@ -11,6 +11,7 @@ import {
   updateWatchServiceStatus,
   getWatchServicesWithUpcomingEstimation,
   sendDeliveredWatchServicesReport,
+  getWatchServiceByPhoneNo,
 } from '../controllers/watch.controller.js';
 
 
@@ -20,6 +21,8 @@ const router = express.Router();
 router.post("/newWatchService", verifyToken, addWatchService);
 
 router.get('/watchService/:billNo',verifyToken, getWatchServiceByBillNo);
+
+router.get('/watchService/phone/:customerPhoneNumber', verifyToken, getWatchServiceByPhoneNo);
 
 router.put('/updateStatus/:billNo',verifyToken, updateWatchServiceStatus);
 
