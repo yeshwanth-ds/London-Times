@@ -1,5 +1,5 @@
 {
-  "name": "watch-store",
+  "name": "LondonTimes",
   "version": "1.0.0",
   "main": "backend/index.js",
   "scripts": {
