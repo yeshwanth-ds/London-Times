@@ -1,9 +1,14 @@
-// Import the WatchService model
+// Import dotenv to configure environment variables
+// import dotenv from 'dotenv';
+// dotenv.config();
+// Import other modules
 import PDFDocument from 'pdfkit';
 import fs from 'fs';
 import path from 'path';
 import { sendDeliveredWatchEmailWithAttachment, sendDueWatchServicesEmail } from '../mailtrap/emails.js';
 import { WatchService } from '../models/watch.model.js';
+// import moment from 'moment-timezone';
+// import twilio from 'twilio';
 
 // Controller to get a watch service by bill number
 export const getWatchServiceByBillNo = async (req, res) => {
@@ -35,6 +40,21 @@ export const getWatchServiceByBillNo = async (req, res) => {
   }
 };
 
+// // Function to send WhatsApp message
+// const sendWhatsAppMessage = (from, to, message) => {
+//   const accountSid = process.env.Account_SID;
+//   const authToken = process.env.Auth_Token;
+//   const client = twilio(accountSid, authToken); // Use ES import for Twilio
+
+//   client.messages
+//     .create({
+//       from,
+//       to,
+//       body: message,
+//     })
+//     .then((message) => console.log('Message sent with SID:', message.sid))
+//     .catch((error) => console.error('Error sending message:', error));
+// };
 
 // Controller to update the status of a watch service by bill number
 export const updateWatchServiceStatus = async (req, res) => {
@@ -66,6 +86,21 @@ export const updateWatchServiceStatus = async (req, res) => {
       });
     }
 
+    // // If status is 'Completed', send a WhatsApp message
+    // if (status === 'Completed') {
+    //   const { customerPhoneNumber } = service; // Retrieve phone number from service
+
+    //   if (customerPhoneNumber) {
+    //     const indiaTime = moment.tz('Asia/Kolkata').format('h:mm A');
+    //     const messageContent = `Hello! Your watch service with bill number ${billNo} is completed. Please come to collect it. Current Indian time is ${indiaTime}.`;
+    //     const formattedPhoneNumber = `+91${customerPhoneNumber}`;
+    //     // Send the message to the customer's phone number
+    //     sendWhatsAppMessage('whatsapp:+14155238886', `whatsapp:${formattedPhoneNumber}`, messageContent);
+    //   } else {
+    //     console.error('No phone number available for the provided bill number.');
+    //   }
+    // }
+
     // Respond with the updated watch service data
     res.status(200).json({
       success: true,
@@ -81,7 +116,6 @@ export const updateWatchServiceStatus = async (req, res) => {
     });
   }
 };
-
 
 
 // Controller to get all watch services
