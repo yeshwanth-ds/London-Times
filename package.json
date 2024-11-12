@@ -27,8 +27,7 @@
     "node-cron": "^3.0.3",
     "nodemailer": "^6.9.16",
     "nodemon": "^3.1.7",
-    "pdfkit": "^0.15.1",
-    "twilio": "^5.3.5"
+    "pdfkit": "^0.15.1"
   },
   "devDependencies": {
     "cross-env": "^7.0.3"

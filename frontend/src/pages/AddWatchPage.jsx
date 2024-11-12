@@ -16,7 +16,7 @@ const AddWatchPage = () => {
     customerPhoneNumber: "",
     watchType: "Analog",
     brand: "",
-    model: "", // Model field is not required anymore
+    model: "",
     serviceType: "Battery Replacement",
     estimatedCompletionDate: "",
     cost: "",
@@ -35,7 +35,6 @@ const AddWatchPage = () => {
     setLoading(true);
     setError("");
 
-    // Filter out empty fields for optional form inputs
     const filteredFormData = Object.keys(formData).reduce((acc, key) => {
       if (
         formData[key] ||
@@ -46,12 +45,11 @@ const AddWatchPage = () => {
       return acc;
     }, {});
 
-  
     try {
       const response = await axios.post(`${API_URL}/newWatchService`, filteredFormData);
       if (response.data.success) {
         toast.success("Watch service added successfully!");
-        setTimeout(() => navigate("/dashboard"), 2000); // Redirect after 2 seconds
+        setTimeout(() => navigate("/dashboard"), 2000);
       }
     } catch (error) {
       setError("Failed to add watch service. Please try again.");
@@ -80,24 +78,12 @@ const AddWatchPage = () => {
               />
             </div>
 
-
             <div className="form-group">
-              <label className="block text-sm font-medium text-gray-700 mb-1">Customer Email</label>
+              <label className="block text-sm font-medium text-gray-700 mb-1">Customer Phone Number *</label>
               <input
-                type="email"
-                name="customerEmail"
-                value={formData.customerEmail}
-                onChange={handleChange}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gold"
-              />
-            </div>
-
-            <div className="form-group">
-              <label className="block text-sm font-medium text-gray-700 mb-1">Customer Name *</label>
-              <input
-                type="text"
-                name="customerName"
-                value={formData.customerName}
+                type="tel"
+                name="customerPhoneNumber"
+                value={formData.customerPhoneNumber}
                 onChange={handleChange}
                 required
                 className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gold"
@@ -105,11 +91,23 @@ const AddWatchPage = () => {
             </div>
 
             <div className="form-group">
-              <label className="block text-sm font-medium text-gray-700 mb-1">Customer Phone Number</label>
+              <label className="block text-sm font-medium text-gray-700 mb-1">Cost *</label>
               <input
-                type="tel"
-                name="customerPhoneNumber"
-                value={formData.customerPhoneNumber}
+                type="number"
+                name="cost"
+                value={formData.cost}
+                onChange={handleChange}
+                required
+                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gold"
+              />
+            </div>
+
+            <div className="form-group">
+              <label className="block text-sm font-medium text-gray-700 mb-1">Customer Name</label>
+              <input
+                type="text"
+                name="customerName"
+                value={formData.customerName}
                 onChange={handleChange}
                 className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gold"
               />
@@ -132,11 +130,11 @@ const AddWatchPage = () => {
             </div>
 
             <div className="form-group">
-              <label className="block text-sm font-medium text-gray-700 mb-1">Brand</label>
+              <label className="block text-sm font-medium text-gray-700 mb-1">Customer Email</label>
               <input
-                type="text"
-                name="brand"
-                value={formData.brand}
+                type="email"
+                name="customerEmail"
+                value={formData.customerEmail}
                 onChange={handleChange}
                 className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gold"
               />
@@ -159,13 +157,12 @@ const AddWatchPage = () => {
               </select>
             </div>
 
-            
             <div className="form-group">
-              <label className="block text-sm font-medium text-gray-700 mb-1">Model</label> {/* Model is now optional */}
+              <label className="block text-sm font-medium text-gray-700 mb-1">Brand</label>
               <input
                 type="text"
-                name="model"
-                value={formData.model}
+                name="brand"
+                value={formData.brand}
                 onChange={handleChange}
                 className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gold"
               />
@@ -184,13 +181,12 @@ const AddWatchPage = () => {
             </div>
 
             <div className="form-group">
-              <label className="block text-sm font-medium text-gray-700 mb-1">Cost *</label>
+              <label className="block text-sm font-medium text-gray-700 mb-1">Model</label>
               <input
-                type="number"
-                name="cost"
-                value={formData.cost}
+                type="text"
+                name="model"
+                value={formData.model}
                 onChange={handleChange}
-                required
                 className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gold"
               />
             </div>

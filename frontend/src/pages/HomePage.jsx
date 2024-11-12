@@ -28,10 +28,12 @@ const Homepage = () => {
             />
           </div>
           <div className="md:w-1/2 md:pl-12 space-y-6">
-            <h1 className="text-5xl font-bold text-black">Timeless Elegance</h1>
+            <h1 className="text-5xl font-bold text-black">Welcome to LondonTimes</h1>
             <p className="text-xl text-gray-600">
-              Discover our exquisite collection of luxury timepieces, where precision meets artistry.
+            At LondonTimes, we are dedicated to the art of timekeeping, offering an exclusive collection of premium luxury timepieces and exceptional watch services. Our passion for craftsmanship shines through in every watch we curate, ensuring that each piece reflects elegance, precision, and style.
             </p>
+
+           
            
           </div>
         </section>

@@ -10,7 +10,7 @@ const watchServiceSchema = new mongoose.Schema({
 
   customerName: {
     type: String,  // Customer name is a string
-    required: true,  // Customer name is required
+    required: false,  // Customer name is required
   },
 
   customerEmail: {
@@ -20,7 +20,7 @@ const watchServiceSchema = new mongoose.Schema({
 
   customerPhoneNumber: {
     type: Number,  // Customer phone number is a number
-    required: false,  // Phone number is optional
+    required: true,  // Phone number is optional
   },
 
   watchType: {

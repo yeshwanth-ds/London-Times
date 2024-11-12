@@ -17,6 +17,17 @@ const Footer = () => {
           <div>
             <h3 className="text-xl font-semibold mb-4 text-gold">Quick Links</h3>
             <ul className="space-y-2">
+            <li>
+  <a
+    href="https://g.page/r/CQ_44JsWldqsEBM/review"
+    target="_blank"
+    rel="noopener noreferrer"
+    className="text-sm text-gray-600 hover:text-gold transition-colors"
+  >
+    Rate Us
+  </a>
+</li>
+
               <li><Link to="/termsPrivacyFAQ" className="text-sm text-gray-600 hover:text-gold transition-colors">Terms of Service</Link></li>
               <li><Link to="/termsPrivacyFAQ" className="text-sm text-gray-600 hover:text-gold transition-colors">Privacy Policy</Link></li>
               <li><Link to="/termsPrivacyFAQ" className="text-sm text-gray-600 hover:text-gold transition-colors">FAQ</Link></li>
@@ -25,8 +36,8 @@ const Footer = () => {
           <div>
             <h3 className="text-xl font-semibold mb-4 text-gold">Contact Us</h3>
             <ul className="space-y-2 text-sm text-gray-600">
-              <li>Vadodara Complex, Near Head Post Office</li>
-              <li>contact@londontimes.com</li>
+              <li>Vadodara Complex, Near Head Post Office, Udupi, Karnataka 576101</li>
+              <li>mayurgreatbrands@gmail.com</li>
               <li>+91 08202531170</li>
             </ul>
           </div>

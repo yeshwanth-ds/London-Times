@@ -187,7 +187,7 @@ const TrackWatchPage = () => {
                           <p><strong>Phone:</strong> {service.customerPhoneNumber}</p>
                           <p><strong>Service Type:</strong> {service.serviceType}</p>
                           <p><strong>Watch Type:</strong> {service.watchType}</p>
-                          <p><strong>Cost:</strong> ${service.cost}</p>
+                          <p><strong>Cost:</strong> ₹ {service.cost}</p>
                         </td>
                         <td className="border p-4">{new Date(service.estimatedCompletionDate).toISOString().split('T')[0]}</td>
                         <td className="border p-4">{service.description}</td>
