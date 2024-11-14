@@ -97,12 +97,10 @@ export const sendResetSuccessfulEmail = async (email) => {
         console.error(`Error sending password reset success email`, error);
         throw new Error(`Error sending password reset success email: ${error}`);
     }
-};
-export const sendDueWatchServicesEmail = async (email, billNos) => {
+};export const sendDueWatchServicesEmail = async (email, serviceDetails) => {
     try {
-     
-      const htmlContent = DUE_WATCH_SERVICES_TEMPLATE(billNos);
-
+      const htmlContent = DUE_WATCH_SERVICES_TEMPLATE(serviceDetails);
+  
       const info = await transporter.sendMail({
         from: `"${sender.name}" <${sender.email}>`,
         to: email,
@@ -110,10 +108,10 @@ export const sendDueWatchServicesEmail = async (email, billNos) => {
         html: htmlContent,
       });
   
-     
     } catch (error) {
       console.error("Error sending due watch services email:", error);
       throw new Error(`Error sending due watch services email: ${error}`);
     }
   };
+  
   

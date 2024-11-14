@@ -257,39 +257,41 @@ export const addWatchService = async (req, res) => {
     });
   }
 };
-
-
-
 // Controller to get bill numbers of watch services with status "Pending" or "In Progress"
-// and the estimated completion date within the next three days
 export const getWatchServicesWithUpcomingEstimation = async (req, res) => {
   try {
-    // Get the current date and the date for three days from now
-    const currentDate = new Date();
-    const threeDaysFromNow = new Date(currentDate);
-    threeDaysFromNow.setDate(currentDate.getDate() + 3);
-
     // Find all watch services that match the criteria
     const services = await WatchService.find({
-      serviceStatus: { $in: ['Pending', 'In Progress'] },  // Status is either Pending or In Progress
-      estimatedCompletionDate: { $gte: currentDate, $lte: threeDaysFromNow },  // Estimated date within the next 3 days
+      serviceStatus: { $in: ['Pending', 'In Progress'] }  // Status is either Pending or In Progress
     });
 
-    // Extract the billNo from each service
-    const billNos = services.map(service => service.billNo);
+    // Extract the billNo, customerPhoneNumber, and description from each service
+    const serviceDetails = services.map(service => ({
+      billNo: service.billNo,
+      customerPhoneNumber: service.customerPhoneNumber,
+      description: service.description,
+    }));
 
     // Hardcoded email
     const email = process.env.ADMIN_EMAIL;
 
-    // Send email with the list of bill numbers
-    await sendDueWatchServicesEmail(email, billNos);
-
-    // Respond with the array of billNos
-    res.status(200).json({
-      success: true,
-      message: 'Bill numbers of services with upcoming estimations fetched successfully!',
-      billNos,
-    });
+    // Try to send email with the list of service details
+    try {
+      await sendDueWatchServicesEmail(email, serviceDetails);
+      res.status(200).json({
+        success: true,
+        message: 'Email sent successfully with upcoming watch service estimations!',
+        serviceDetails,
+      });
+    } catch (emailError) {
+      console.error('Error sending email:', emailError);
+      res.status(500).json({
+        success: false,
+        message: 'Failed to send email with upcoming watch service estimations.',
+        serviceDetails, // Include the service details in case the email failed but retrieval was successful
+      });
+    }
+    
   } catch (error) {
     console.error('Error retrieving watch services with upcoming estimations:', error);
     res.status(500).json({
@@ -299,6 +301,8 @@ export const getWatchServicesWithUpcomingEstimation = async (req, res) => {
     });
   }
 };
+
+
 // Controller to send a report of delivered watch services via email and delete delivered items
 export const sendDeliveredWatchServicesReport = async (req, res) => {
   try {
