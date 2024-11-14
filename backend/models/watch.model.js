@@ -43,10 +43,7 @@ const watchServiceSchema = new mongoose.Schema({
     type: String,  // Service type is a string
     required: true,  // Service type is required
     enum: [
-      'Battery Replacement', 
-      'Strap Repair', 
-      'Cleaning', 
-      'Complete Overhaul', 
+      'Cell Replacement', 
       'Other'
     ],  // Valid service options
   },

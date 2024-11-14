@@ -17,7 +17,7 @@ const AddWatchPage = () => {
     watchType: "Analog",
     brand: "",
     model: "",
-    serviceType: "Battery Replacement",
+    serviceType: "Cell Replacement",
     estimatedCompletionDate: "",
     cost: "",
     description: "",
@@ -78,41 +78,7 @@ const AddWatchPage = () => {
               />
             </div>
 
-            <div className="form-group">
-              <label className="block text-sm font-medium text-gray-700 mb-1">Customer Phone Number *</label>
-              <input
-                type="tel"
-                name="customerPhoneNumber"
-                value={formData.customerPhoneNumber}
-                onChange={handleChange}
-                required
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gold"
-              />
-            </div>
-
-            <div className="form-group">
-              <label className="block text-sm font-medium text-gray-700 mb-1">Cost *</label>
-              <input
-                type="number"
-                name="cost"
-                value={formData.cost}
-                onChange={handleChange}
-                required
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gold"
-              />
-            </div>
-
-            <div className="form-group">
-              <label className="block text-sm font-medium text-gray-700 mb-1">Customer Name</label>
-              <input
-                type="text"
-                name="customerName"
-                value={formData.customerName}
-                onChange={handleChange}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gold"
-              />
-            </div>
-
+           
             <div className="form-group">
               <label className="block text-sm font-medium text-gray-700 mb-1">Watch Type *</label>
               <select
@@ -129,6 +95,66 @@ const AddWatchPage = () => {
               </select>
             </div>
 
+           
+
+            <div className="form-group">
+              <label className="block text-sm font-medium text-gray-700 mb-1">Customer Phone Number *</label>
+              <input
+                type="tel"
+                name="customerPhoneNumber"
+                value={formData.customerPhoneNumber}
+                onChange={handleChange}
+                required
+                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gold"
+              />
+            </div>
+
+            
+
+           
+            <div className="form-group">
+              <label className="block text-sm font-medium text-gray-700 mb-1">Service Type *</label>
+              <select
+                name="serviceType"
+                value={formData.serviceType}
+                onChange={handleChange}
+                required
+                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gold"
+              >
+                <option value="Battery Replacement">Cell Replacement</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+
+
+
+            <div className="form-group">
+              <label className="block text-sm font-medium text-gray-700 mb-1">Customer Name</label>
+              <input
+                type="text"
+                name="customerName"
+                value={formData.customerName}
+                onChange={handleChange}
+                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gold"
+              />
+            </div>
+
+
+            
+
+
+            <div className="form-group">
+              <label className="block text-sm font-medium text-gray-700 mb-1">Brand</label>
+              <input
+                type="text"
+                name="brand"
+                value={formData.brand}
+                onChange={handleChange}
+                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gold"
+              />
+            </div>
+
+
             <div className="form-group">
               <label className="block text-sm font-medium text-gray-700 mb-1">Customer Email</label>
               <input
@@ -141,29 +167,26 @@ const AddWatchPage = () => {
             </div>
 
             <div className="form-group">
-              <label className="block text-sm font-medium text-gray-700 mb-1">Service Type *</label>
-              <select
-                name="serviceType"
-                value={formData.serviceType}
-                onChange={handleChange}
-                required
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gold"
-              >
-                <option value="Battery Replacement">Battery Replacement</option>
-                <option value="Strap Repair">Strap Repair</option>
-                <option value="Cleaning">Cleaning</option>
-                <option value="Complete Overhaul">Complete Overhaul</option>
-                <option value="Other">Other</option>
-              </select>
-            </div>
-
-            <div className="form-group">
-              <label className="block text-sm font-medium text-gray-700 mb-1">Brand</label>
+              <label className="block text-sm font-medium text-gray-700 mb-1">Model</label>
               <input
                 type="text"
-                name="brand"
-                value={formData.brand}
+                name="model"
+                value={formData.model}
                 onChange={handleChange}
+                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gold"
+              />
+            </div>
+
+           
+
+            <div className="form-group">
+              <label className="block text-sm font-medium text-gray-700 mb-1">Cost *</label>
+              <input
+                type="number"
+                name="cost"
+                value={formData.cost}
+                onChange={handleChange}
+                required
                 className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gold"
               />
             </div>
@@ -180,19 +203,12 @@ const AddWatchPage = () => {
               />
             </div>
 
-            <div className="form-group">
-              <label className="block text-sm font-medium text-gray-700 mb-1">Model</label>
-              <input
-                type="text"
-                name="model"
-                value={formData.model}
-                onChange={handleChange}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gold"
-              />
-            </div>
+         
+           
           </div>
 
-          <div className="form-group mt-4">
+
+           <div className="form-group mt-4">
             <label className="block text-sm font-medium text-gray-700 mb-1">Description</label>
             <textarea
               name="description"
@@ -201,6 +217,8 @@ const AddWatchPage = () => {
               className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gold"
             ></textarea>
           </div>
+
+          
 
           {error && (
             <div className="text-red-500 text-sm mt-4">

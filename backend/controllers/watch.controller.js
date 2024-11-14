@@ -257,6 +257,7 @@ export const addWatchService = async (req, res) => {
     });
   }
 };
+
 // Controller to get bill numbers of watch services with status "Pending" or "In Progress"
 export const getWatchServicesWithUpcomingEstimation = async (req, res) => {
   try {
@@ -265,11 +266,12 @@ export const getWatchServicesWithUpcomingEstimation = async (req, res) => {
       serviceStatus: { $in: ['Pending', 'In Progress'] }  // Status is either Pending or In Progress
     });
 
-    // Extract the billNo, customerPhoneNumber, and description from each service
+    // Extract the billNo, customerPhoneNumber, description, and estimatedCompletionDate from each service
     const serviceDetails = services.map(service => ({
       billNo: service.billNo,
       customerPhoneNumber: service.customerPhoneNumber,
       description: service.description,
+      estimatedCompletionDate: service.estimatedCompletionDate,  // Include estimated completion date
     }));
 
     // Hardcoded email
@@ -288,10 +290,9 @@ export const getWatchServicesWithUpcomingEstimation = async (req, res) => {
       res.status(500).json({
         success: false,
         message: 'Failed to send email with upcoming watch service estimations.',
-        serviceDetails, // Include the service details in case the email failed but retrieval was successful
+        serviceDetails,  // Include the service details in case the email failed but retrieval was successful
       });
     }
-    
   } catch (error) {
     console.error('Error retrieving watch services with upcoming estimations:', error);
     res.status(500).json({
@@ -301,6 +302,7 @@ export const getWatchServicesWithUpcomingEstimation = async (req, res) => {
     });
   }
 };
+
 
 
 // Controller to send a report of delivered watch services via email and delete delivered items

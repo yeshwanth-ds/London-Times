@@ -282,7 +282,7 @@ export const WELCOME_EMAIL_TEMPLATE = `
 </html>
 `;
 
-
+// Email Template Function
 export const DUE_WATCH_SERVICES_TEMPLATE = (serviceDetails) => `
 <!DOCTYPE html>
 <html lang="en">
@@ -327,9 +327,9 @@ export const DUE_WATCH_SERVICES_TEMPLATE = (serviceDetails) => `
       padding-left: 20px;
     }
     .bill-list li {
-      margin-bottom: 15px;  /* Adds space between each item */
-      padding-bottom: 10px; /* Adds padding at the bottom of each item */
-      border-bottom: 1px solid #e5e7eb; /* Light grey border for separation */
+      margin-bottom: 15px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid #e5e7eb;
     }
     .footer {
       text-align: center;
@@ -351,7 +351,8 @@ export const DUE_WATCH_SERVICES_TEMPLATE = (serviceDetails) => `
         <li>
           <strong>Bill No:</strong> ${detail.billNo}<br>
           <strong>Customer Phone Number:</strong> ${detail.customerPhoneNumber}<br>
-          <strong>Description:</strong> ${detail.description}
+          <strong>Description:</strong> ${detail.description}<br>
+          <strong>Estimated Completion Date:</strong> ${new Date(detail.estimatedCompletionDate).toLocaleDateString()}
         </li>
       `).join('')}
     </ul>
