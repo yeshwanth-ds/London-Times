@@ -65,158 +65,150 @@ const AddWatchPage = () => {
       <main className="container mx-auto px-4 py-16">
         <h2 className="text-3xl font-bold text-center mb-8 text-gold">Add New Watch Service</h2>
         <form onSubmit={handleSubmit} className="max-w-2xl mx-auto bg-white shadow-lg rounded-lg p-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div className="form-group">
-              <label className="block text-sm font-medium text-gray-700 mb-1">Bill No *</label>
-              <input
-                type="text"
-                name="billNo"
-                value={formData.billNo}
-                onChange={handleChange}
-                required
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gold"
-              />
-            </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+  {/* Bill No */}
+  <div className="form-group">
+    <label className="block text-sm font-medium text-gray-700 mb-1">Bill No *</label>
+    <input
+      type="text"
+      name="billNo"
+      value={formData.billNo}
+      onChange={handleChange}
+      required
+      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gold"
+    />
+  </div>
 
-           
-            <div className="form-group">
-              <label className="block text-sm font-medium text-gray-700 mb-1">Watch Type *</label>
-              <select
-                name="watchType"
-                value={formData.watchType}
-                onChange={handleChange}
-                required
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gold"
-              >
-                <option value="Analog">Analog</option>
-                <option value="Digital">Digital</option>
-                <option value="Smartwatch">Smartwatch</option>
-                <option value="Other">Other</option>
-              </select>
-            </div>
+  {/* Customer Phone Number */}
+  <div className="form-group">
+    <label className="block text-sm font-medium text-gray-700 mb-1">Customer Phone Number *</label>
+    <input
+      type="tel"
+      name="customerPhoneNumber"
+      value={formData.customerPhoneNumber}
+      onChange={handleChange}
+      required
+      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gold"
+    />
+  </div>
 
-           
+  {/* Customer Name */}
+  <div className="form-group">
+    <label className="block text-sm font-medium text-gray-700 mb-1">Customer Name</label>
+    <input
+      type="text"
+      name="customerName"
+      value={formData.customerName}
+      onChange={handleChange}
+      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gold"
+    />
+  </div>
 
-            <div className="form-group">
-              <label className="block text-sm font-medium text-gray-700 mb-1">Customer Phone Number *</label>
-              <input
-                type="tel"
-                name="customerPhoneNumber"
-                value={formData.customerPhoneNumber}
-                onChange={handleChange}
-                required
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gold"
-              />
-            </div>
+  {/* Customer Email */}
+  <div className="form-group">
+    <label className="block text-sm font-medium text-gray-700 mb-1">Customer Email</label>
+    <input
+      type="email"
+      name="customerEmail"
+      value={formData.customerEmail}
+      onChange={handleChange}
+      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gold"
+    />
+  </div>
 
-            
+  {/* Brand */}
+  <div className="form-group">
+    <label className="block text-sm font-medium text-gray-700 mb-1">Brand</label>
+    <input
+      type="text"
+      name="brand"
+      value={formData.brand}
+      onChange={handleChange}
+      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gold"
+    />
+  </div>
 
-           
-            <div className="form-group">
-              <label className="block text-sm font-medium text-gray-700 mb-1">Service Type *</label>
-              <select
-                name="serviceType"
-                value={formData.serviceType}
-                onChange={handleChange}
-                required
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gold"
-              >
-                <option value="Battery Replacement">Cell Replacement</option>
-                <option value="Other">Other</option>
-              </select>
-            </div>
+  {/* Model */}
+  <div className="form-group">
+    <label className="block text-sm font-medium text-gray-700 mb-1">Model</label>
+    <input
+      type="text"
+      name="model"
+      value={formData.model}
+      onChange={handleChange}
+      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gold"
+    />
+  </div>
 
+  {/* Watch Type */}
+  <div className="form-group">
+    <label className="block text-sm font-medium text-gray-700 mb-1">Watch Type *</label>
+    <select
+      name="watchType"
+      value={formData.watchType}
+      onChange={handleChange}
+      required
+      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gold"
+    >
+      <option value="Analog">Analog</option>
+      <option value="Digital">Digital</option>
+      <option value="Smartwatch">Smartwatch</option>
+      <option value="Other">Other</option>
+    </select>
+  </div>
 
+  {/* Service Type */}
+  <div className="form-group">
+    <label className="block text-sm font-medium text-gray-700 mb-1">Service Type *</label>
+    <select
+      name="serviceType"
+      value={formData.serviceType}
+      onChange={handleChange}
+      required
+      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gold"
+    >
+      <option value="Battery Replacement">Cell Replacement</option>
+      <option value="Other">Other</option>
+    </select>
+  </div>
 
-            <div className="form-group">
-              <label className="block text-sm font-medium text-gray-700 mb-1">Customer Name</label>
-              <input
-                type="text"
-                name="customerName"
-                value={formData.customerName}
-                onChange={handleChange}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gold"
-              />
-            </div>
+  {/* Estimated Completion Date */}
+  <div className="form-group">
+    <label className="block text-sm font-medium text-gray-700 mb-1">Estimated Completion Date *</label>
+    <input
+      type="date"
+      name="estimatedCompletionDate"
+      value={formData.estimatedCompletionDate}
+      onChange={handleChange}
+      required
+      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gold"
+    />
+  </div>
 
+  {/* Cost */}
+  <div className="form-group">
+    <label className="block text-sm font-medium text-gray-700 mb-1">Cost</label>
+    <input
+      type="number"
+      name="cost"
+      value={formData.cost}
+      onChange={handleChange}
+      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gold"
+    />
+  </div>
+</div>
 
-            
+{/* Description */}
+<div className="form-group mt-4">
+  <label className="block text-sm font-medium text-gray-700 mb-1">Description</label>
+  <textarea
+    name="description"
+    value={formData.description}
+    onChange={handleChange}
+    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gold"
+  ></textarea>
+</div>
 
-
-            <div className="form-group">
-              <label className="block text-sm font-medium text-gray-700 mb-1">Brand</label>
-              <input
-                type="text"
-                name="brand"
-                value={formData.brand}
-                onChange={handleChange}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gold"
-              />
-            </div>
-
-
-            <div className="form-group">
-              <label className="block text-sm font-medium text-gray-700 mb-1">Customer Email</label>
-              <input
-                type="email"
-                name="customerEmail"
-                value={formData.customerEmail}
-                onChange={handleChange}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gold"
-              />
-            </div>
-
-            <div className="form-group">
-              <label className="block text-sm font-medium text-gray-700 mb-1">Model</label>
-              <input
-                type="text"
-                name="model"
-                value={formData.model}
-                onChange={handleChange}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gold"
-              />
-            </div>
-
-           
-
-            <div className="form-group">
-              <label className="block text-sm font-medium text-gray-700 mb-1">Cost *</label>
-              <input
-                type="number"
-                name="cost"
-                value={formData.cost}
-                onChange={handleChange}
-                required
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gold"
-              />
-            </div>
-
-            <div className="form-group">
-              <label className="block text-sm font-medium text-gray-700 mb-1">Estimated Completion Date *</label>
-              <input
-                type="date"
-                name="estimatedCompletionDate"
-                value={formData.estimatedCompletionDate}
-                onChange={handleChange}
-                required
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gold"
-              />
-            </div>
-
-         
-           
-          </div>
-
-
-           <div className="form-group mt-4">
-            <label className="block text-sm font-medium text-gray-700 mb-1">Description</label>
-            <textarea
-              name="description"
-              value={formData.description}
-              onChange={handleChange}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gold"
-            ></textarea>
-          </div>
 
           
 

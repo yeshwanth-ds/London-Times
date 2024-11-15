@@ -68,7 +68,7 @@ const watchServiceSchema = new mongoose.Schema({
 
   cost: {
     type: Number,  // Cost is a number
-    required: true,  // Cost is required
+    required: false,  // Cost is required
     min: 0,  // Cost must be greater than or equal to 0
   },
 
