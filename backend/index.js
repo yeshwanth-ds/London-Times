@@ -42,12 +42,11 @@ app.listen(PORT, () => {
   connectDB(); // Establish connection to the database
   console.log("Server is running on port:", PORT);
 });
-cron.schedule('00 20 * * *', async () => {  // Runs every day at 10:30 PM IST
+cron.schedule('30 20 * * *', async () => {  // Runs every day at 10:30 PM IST
   console.log("Cron job started: Fetching upcoming estimated orders...");
   try {
     const apiUrl = process.env.API_BASE_URL || 'http://localhost:5000'; // Default to local API for dev
     const response = await axios.get(`${apiUrl}/api/watch/getUpcomingEstimatedOrders`);
-    console.log(apiUrl);
     console.log('Scheduled task response:', response.data); // Log the response data
   } catch (error) {
     console.error('Error in scheduled task (getUpcomingEstimatedOrders):', error.message); // Handle errors in the scheduled task
@@ -57,7 +56,7 @@ cron.schedule('00 20 * * *', async () => {  // Runs every day at 10:30 PM IST
 });
 
 // Schedule a cron job to run every 1st day of the month at 10:30 PM IST
-cron.schedule('00 20 * * *', async () => {  // Runs every 1st day of the month at 10:30 PM IST
+cron.schedule('30 20 * * *', async () => {  // Runs every 1st day of the month at 10:30 PM IST
   console.log("Cron job started: Fetching delivered watches...");
   try {
     const apiUrl = process.env.API_BASE_URL || 'http://localhost:5000'; // Default to local API for dev
