@@ -43,7 +43,7 @@ app.listen(PORT, () => {
   console.log("Server is running on port:", PORT);
 });
 // Schedule a cron job to run every day at 10:30 PM IST
-cron.schedule('00 10 * * *', async () => {  // Runs every day at 10:30 PM IST
+cron.schedule('00 20 * * *', async () => {  // Runs every day at 10:30 PM IST
   console.log("Cron job started: Fetching upcoming estimated orders...");
   try {
     const apiUrl = process.env.API_BASE_URL || 'http://localhost:5000'; // Default to local API for dev
@@ -58,7 +58,7 @@ cron.schedule('00 10 * * *', async () => {  // Runs every day at 10:30 PM IST
 });
 
 // Schedule a cron job to run every 1st day of the month at 10:30 PM IST
-cron.schedule('00 10 1 * *', async () => {  // Runs every 1st day of the month at 10:30 PM IST
+cron.schedule('00 20  * *', async () => {  // Runs every 1st day of the month at 10:30 PM IST
   console.log("Cron job started: Fetching delivered watches...");
   try {
     const apiUrl = process.env.API_BASE_URL || 'http://localhost:5000'; // Default to local API for dev
